@@ -1,22 +1,29 @@
 <?php
-
 header("Access-Control-Allow-Origin: *");
+header('Content-Type: text/html; charset=utf-8');
 error_reporting(-1);
 
 require('application/Application.php');
 
-
-
-function router($params) {
+function router($params)
+{
     $method = $params["method"];
     if ($method) {
         $app = new Application();
-        return $app->login($params);
-    } 
-    return NULL;
+        switch ($method) {
+            case 'check':
+                return true;
+            case 'login':
+                return $app->login($params);
+            case 'logout':
+                return $app->logout($params);
+        }
+    }
+    return null;
 }
 
-function answer($data) {
+function answer($data)
+{
     if ($data) {
         return array(
             'data' => $data,

@@ -13,4 +13,10 @@ class Application {
             return $this->user->login($params['login'], $params['password']);
         }
     }
+
+    function logout($params) {
+        if ($params['token']) { 
+            return $this->user->logout($params['token']);
+        }
+    }
 }
