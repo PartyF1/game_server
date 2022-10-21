@@ -27,9 +27,10 @@ class User {
         }
     }
 
-    function sendMessage($message){
-        $this->db->sendMessage("vasya",$message);
+    function sendMessage($name, $message){
+        $this->db->sendMessage($name, $message);
         return array (
+            "name" => $name,
             'message' => $message
         );
     }

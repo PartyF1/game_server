@@ -60,7 +60,7 @@ class DB {
         return true;
     }
 
-    public function sendMessage($name = "vasya", $message){
+    public function sendMessage($name, $message){
         $query = "INSERT INTO `message`(`id`, `message`, `userName`) VALUES(" . "null" . ",'" .  $message .  "','" . $name."')";
         $this->db->query($query);
         return true;

@@ -21,8 +21,8 @@ class Application {
     }
 
     function sendMessage($params) {
-        if ($params['message']) 
-            return $this->user->sendMessage($params['message']);   
+        if ($params['message'] && $params["name"]) 
+            return $this->user->sendMessage($params['name'], $params['message']);   
     }
     
     function showChat() {    
