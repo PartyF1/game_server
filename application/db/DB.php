@@ -23,11 +23,24 @@ class DB {
     }
 
     private function getArray($query) {
+        $count = 0;
         $stmt = $this->db->query($query);
         $result = array();
-        while($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $result[] = $row;
+         while($row = $stmt->fetchObject()) {
+            $result[] = array(
+                "name" => $row->userName,
+                "message" => $row->message
+            );
+            $count++;
         }
+        /*if($count >= 5)
+        {
+        $query = 'DELETE FROM `message` WHERE id='.$result[0][2];
+        $this->db->query($query);
+        $query = 'ALTER TABLE `message` AUTO_INCREMENT = 0';
+        $this->db->query($query);
+        }*/
+
         return $result;
     }
 
@@ -47,8 +60,21 @@ class DB {
         return true;
     }
 
+    public function sendMessage($name = "vasya", $message){
+        $query = "INSERT INTO `message`(`id`, `message`, `userName`) VALUES(" . "null" . ",'" .  $message .  "','" . $name."')";
+        $this->db->query($query);
+        return true;
+        //INSERT INTO `message`(`id`, `message`, `userName`) VALUES (null,'[value-2]','[value-3]')
+    }
+
     public function getUsers() {
         $query = 'SELECT * FROM users';
         return $this->getArray($query);
     }
+
+    public function showChat() {
+        $query = 'SELECT * FROM `message` ';
+        return $this->getArray($query);
+    }
+
 }

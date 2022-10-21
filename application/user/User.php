@@ -26,4 +26,16 @@ class User {
             return $this->db->updateToken($user->id, '');
         }
     }
+
+    function sendMessage($message){
+        $this->db->sendMessage("vasya",$message);
+        return array (
+            'message' => $message
+        );
+    }
+
+    function showChat(){
+        
+        return $this->db->showChat();
+    }
 }

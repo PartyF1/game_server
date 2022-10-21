@@ -19,4 +19,13 @@ class Application {
             return $this->user->logout($params['token']);
         }
     }
+
+    function sendMessage($params) {
+        if ($params['message']) 
+            return $this->user->sendMessage($params['message']);   
+    }
+    
+    function showChat() {    
+        return $this->user->showChat();   
+    }
 }
